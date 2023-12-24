@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="CartMapper">
+
+   	<!-- 장바구니 추가 -->
+   	<insert id="cartAdd" parameterType="CartDTO">
+   		insert into cart(userid,gCode,gName,gPrice,gSize,gColor,gAmount,gImage)
+   		values (#{userid},#{gCode},#{gName},#{gPrice},#{gSize},#{gColor},#{gAmount},#{gImage})
+   	</insert>
+   	
+   	<!-- 장바구니 조회 -->
+   	<select id="cartList" parameterType="string" resultType="CartDTO">
+   		select num, userid,gCode,gName,gPrice,gSize,gColor,gAmount,gImage
+   		from cart
+   		where userid = #{userid}
+   	</select>
+   	
+   	<!-- 장바구니 상품 수정 -->
+	<update id="cartUpdate" parameterType="hashmap">
+		update cart
+		set gAmount = #{gAmount}
+		where num=#{num}
+	</update>
+</mapper>
